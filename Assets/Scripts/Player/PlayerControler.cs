@@ -12,7 +12,7 @@ public class PlayerControler : MonoBehaviour
 
     float moveSpeed = 2;
 
-    float radius = 0.5f;
+    float radius = 0.4f;
     [SerializeField] float angle = 0f;
     Vector3 centerPosition;
 
@@ -65,6 +65,7 @@ public class PlayerControler : MonoBehaviour
             }
             else
             {
+                Debug.Log("도착!");
                 // 이동 완료 후 초기 위치로 설정
                 attackCol.transform.localPosition = centerPosition - new Vector3(0, radius, 0);
                 elapsedTime = 0; // 경과 시간 초기화
@@ -106,6 +107,11 @@ public class PlayerControler : MonoBehaviour
     public void ResetClosestMonster()
     {
         closestMonsterTransform = null;
+    }
+
+    public bool CheckClosestMonsterActive()
+    {
+        return closestMonsterTransform.gameObject.activeSelf;
     }
 
     private void FlipSprite(float directionX)

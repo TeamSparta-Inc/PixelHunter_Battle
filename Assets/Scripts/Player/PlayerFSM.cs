@@ -10,9 +10,6 @@ public class PlayerFSM : MonoBehaviour
 
     StateMachine<Enums.StateEnum> FSM;
 
-    WaitForSeconds _attackDelay;
-    WaitForSeconds meleeAttackDelay;
-    WaitForSeconds rangedAttackDelay;
 
     private void Awake()
     {
@@ -24,8 +21,6 @@ public class PlayerFSM : MonoBehaviour
 
     private void Start()
     {
-        meleeAttackDelay = new WaitForSeconds(player.GetAnimationLength(Strings.ANIMATION_MELEEATTACK));
-        rangedAttackDelay = new WaitForSeconds(player.GetAnimationLength(Strings.ANIMATION_RANGEDATTACK));
     }
 
     private void Update()
@@ -100,6 +95,7 @@ public class PlayerFSM : MonoBehaviour
 
     void Run_Exit()
     {
+        playerControler.Move();
         player.StopAnimation(Strings.ANIMATION_RUN);
     }
 
@@ -111,7 +107,6 @@ public class PlayerFSM : MonoBehaviour
 
     void MeleeAttack_Enter()
     {
-        _attackDelay = meleeAttackDelay;
         Debug.Log(Strings.ANIMATION_MELEEATTACK);
     }
 
@@ -121,11 +116,12 @@ public class PlayerFSM : MonoBehaviour
         {
             Attack();
             lastAttackTime = Time.time; // 마지막 공격 시간 업데이트
-            Debug.Log("나 실행 됬다잉");
         }
 
-        if (!playerControler.CheckClosestMonster() || !player.isAttacking)
+        if (!playerControler.CheckClosestMonster() || !player.isAttacking || !playerControler.CheckClosestMonsterActive())
         {
+            Debug.Log("나 실행 됬다잉");
+            
             FSM.ChangeState(Enums.StateEnum.Idle);
         }
     }
@@ -141,7 +137,6 @@ public class PlayerFSM : MonoBehaviour
 
     void RangedAttack_Enter()
     {
-        _attackDelay = rangedAttackDelay;
         Debug.Log(Strings.ANIMATION_RANGEDATTACK);
     }
 
