@@ -2,17 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Monster : MonoBehaviour
+public class Monster : Character
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] GameObject deathEffect;
+    [SerializeField] GameObject hitEffect;
+    [SerializeField] MonsterFSM FSM;
 
-    // Update is called once per frame
-    void Update()
+    public override bool TakeDamage(float value)
     {
-        
+        hitEffect.SetActive(true);
+        if (CheckHealth())
+        {
+            deathEffect.SetActive(true);
+            
+        }
+        return base.TakeDamage(value);
     }
 }
