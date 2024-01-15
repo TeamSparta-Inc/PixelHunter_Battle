@@ -12,7 +12,7 @@ public class PlayerControler : MonoBehaviour
 
     float moveSpeed = 2;
 
-    float radius = 0.4f;
+    float radius = 0.45f;
     [SerializeField] float angle = 0f;
     Vector3 centerPosition;
 
