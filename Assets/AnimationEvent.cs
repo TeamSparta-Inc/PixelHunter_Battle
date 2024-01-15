@@ -13,8 +13,13 @@ public class AnimationEvent : MonoBehaviour
         playerControler.AttackEvent();
     }
 
-    public void StopAnimationEvent()
+    public void StopMeleeAttackAnimationEvent()
     {
         player.StopAnimation(Strings.ANIMATION_MELEEATTACK);
+    }
+
+    public void StopRangedAttackAnimationEvent()
+    {
+        player.StopAnimation(Strings.ANIMATION_RANGEDATTACK);
     }
 }

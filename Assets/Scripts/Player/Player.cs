@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Player : Character
 {
-    private bool isMeleeAttack = true;
+    [SerializeField] private bool isMeleeAttack = false;
     [SerializeField] GameObject meleeAttackRange;
     [SerializeField] GameObject RangedAttackRange;
 

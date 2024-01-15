@@ -5,7 +5,15 @@ using UnityEngine;
 public class MonsterControler : MonoBehaviour
 {
     Transform closestMonsterTransform;
+
+    [SerializeField] Rigidbody2D rb;
+
     int moveSpeed = 1;
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
 
     private void Start()
     {
@@ -16,11 +24,11 @@ public class MonsterControler : MonoBehaviour
     {
         if (closestMonsterTransform == null) return false;
 
-        var position = transform.position;
+        Vector3 position = rb.position;
         var direction = (closestMonsterTransform.position - position).normalized;
 
-        position += direction * (moveSpeed * Time.deltaTime);
-        transform.position = position;
+        var newPosition = position + direction * (moveSpeed * Time.fixedDeltaTime);
+        rb.MovePosition(newPosition);
 
         FlipSprite(direction.x);
 

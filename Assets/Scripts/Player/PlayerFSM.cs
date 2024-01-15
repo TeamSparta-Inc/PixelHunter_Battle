@@ -10,6 +10,11 @@ public class PlayerFSM : MonoBehaviour
 
     StateMachine<Enums.StateEnum> FSM;
 
+    const float attackDelay = 1;
+
+    private float lastAttackTime = 0f;
+
+    string currentAniamtionName;
 
     private void Awake()
     {
@@ -19,9 +24,6 @@ public class PlayerFSM : MonoBehaviour
         FSM.ChangeState(Enums.StateEnum.Spawn);
     }
 
-    private void Start()
-    {
-    }
 
     private void Update()
     {
@@ -102,11 +104,10 @@ public class PlayerFSM : MonoBehaviour
     #endregion
 
     #region MeleeAttack
-    private float lastAttackTime = 0f;
-    private float attackDelay = 1f; // 1초 딜레이
 
     void MeleeAttack_Enter()
     {
+        currentAniamtionName = Strings.ANIMATION_MELEEATTACK;
         Debug.Log(Strings.ANIMATION_MELEEATTACK);
     }
 
@@ -114,16 +115,11 @@ public class PlayerFSM : MonoBehaviour
     {
         if (Time.time - lastAttackTime >= attackDelay) // 마지막 공격 시간으로부터 1초가 지났는지 확인
         {
-            Attack();
+            TryAttack();
             lastAttackTime = Time.time; // 마지막 공격 시간 업데이트
         }
 
-        if (!playerControler.CheckClosestMonster() || !player.isAttacking || !playerControler.CheckClosestMonsterActive())
-        {
-            Debug.Log("나 실행 됬다잉");
-            
-            FSM.ChangeState(Enums.StateEnum.Idle);
-        }
+        CheckStateTransition();
     }
 
     void MeleeAttack_Exit()
@@ -137,20 +133,25 @@ public class PlayerFSM : MonoBehaviour
 
     void RangedAttack_Enter()
     {
+        currentAniamtionName = Strings.ANIMATION_RANGEDATTACK;
         Debug.Log(Strings.ANIMATION_RANGEDATTACK);
     }
 
     void RangedAttack_Update()
     {
-        if (!playerControler.CheckClosestMonster())
+        if (Time.time - lastAttackTime >= attackDelay) // 마지막 공격 시간으로부터 1초가 지났는지 확인
         {
-            FSM.ChangeState(Enums.StateEnum.Idle);
+            TryAttack();
+            StartCoroutine(playerControler.RangedAttack());
+            lastAttackTime = Time.time; // 마지막 공격 시간 업데이트
         }
+
+        CheckStateTransition();
     }
 
     void RangedAttack_Exit()
     {
-
+        player.StopAnimation(Strings.ANIMATION_RANGEDATTACK);
     }
     #endregion
 
@@ -165,8 +166,20 @@ public class PlayerFSM : MonoBehaviour
     #endregion
 
 
-    void Attack()
+    void CheckStateTransition()
     {
-        player.StartAnimation(Strings.ANIMATION_MELEEATTACK);
+        if (!playerControler.CheckClosestMonster() || !player.isAttacking || !playerControler.CheckClosestMonsterActive())
+        {
+            FSM.ChangeState(Enums.StateEnum.Idle);
+        }
+    }
+
+    void TryAttack()
+    {
+        if (Time.time - lastAttackTime >= attackDelay)
+        {
+            player.StartAnimation(currentAniamtionName);
+            lastAttackTime = Time.time;
+        }
     }
 }

@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
+using static UnityEngine.GraphicsBuffer;
 
 public class PlayerControler : MonoBehaviour
 {
     Player player;
 
+    [SerializeField] Rigidbody2D rb;
     [SerializeField] Transform closestMonsterTransform;
 
 
@@ -22,6 +24,7 @@ public class PlayerControler : MonoBehaviour
     private void Awake()
     {
         player = GetComponent<Player>();
+        rb = GetComponent<Rigidbody2D>();
     }
     private void Start()
     {
@@ -33,20 +36,23 @@ public class PlayerControler : MonoBehaviour
     {
         if (closestMonsterTransform == null) return false;
 
-        var position = transform.position;
+        Vector3 position = rb.position;
         var direction = (closestMonsterTransform.position - position).normalized;
 
-        position += direction * (moveSpeed * Time.deltaTime);
-        transform.position = position;
+        var newPosition = position + direction * (moveSpeed * Time.fixedDeltaTime);
+        rb.MovePosition(newPosition);
 
         FlipSprite(direction.x);
 
         return true;
     }
+
     private float elapsedTime = 0f; // 경과 시간
     public float totalTime; // 반원을 이동하는 데 걸리는 총 시간
 
-    public IEnumerator Attack()
+    [SerializeField] Rigidbody2D projectile;
+
+    public IEnumerator MeleeAttack()
     {
         totalTime = tempSpeed;
         while(true)
@@ -75,9 +81,23 @@ public class PlayerControler : MonoBehaviour
         }
     }
 
+    public IEnumerator RangedAttack()
+    {
+        while (Vector3.Distance(projectile.position, closestMonsterTransform.position) > 0.1f)
+        {
+            Vector2 direction = (closestMonsterTransform.position - (Vector3)projectile.position).normalized;
+            projectile.position += direction * 10 * Time.deltaTime;
+
+            yield return null; // 다음 프레임까지 기다립니다
+        }
+
+        // 목표에 도달했을 때의 처리
+        Debug.Log("Target reached!");
+    }
+
     public void AttackEvent()
     {
-        StartCoroutine(Attack());
+        StartCoroutine(MeleeAttack());
     }
 
     public void FindClosestMonster()
