@@ -11,7 +11,6 @@ public class PlayerControler : MonoBehaviour
     [SerializeField] Rigidbody2D rb;
     [SerializeField] Transform closestMonsterTransform;
 
-
     float moveSpeed = 2;
 
     float radius = 0.45f;
@@ -50,8 +49,6 @@ public class PlayerControler : MonoBehaviour
     private float elapsedTime = 0f; // 경과 시간
     public float totalTime; // 반원을 이동하는 데 걸리는 총 시간
 
-    [SerializeField] Rigidbody2D projectile;
-
     public IEnumerator MeleeAttack()
     {
         totalTime = tempSpeed;
@@ -83,6 +80,10 @@ public class PlayerControler : MonoBehaviour
 
     public IEnumerator RangedAttack()
     {
+        Rigidbody2D projectile = PlayerManager.instance.Getprojectile().GetComponent<Rigidbody2D>();
+        projectile.transform.position = transform.position;
+
+        projectile.gameObject.SetActive(true);
         while (Vector3.Distance(projectile.position, closestMonsterTransform.position) > 0.1f)
         {
             Vector2 direction = (closestMonsterTransform.position - (Vector3)projectile.position).normalized;
@@ -92,12 +93,19 @@ public class PlayerControler : MonoBehaviour
         }
 
         // 목표에 도달했을 때의 처리
+        PlayerManager.instance.ReturnProjectile(projectile.gameObject);
+        projectile.gameObject.SetActive(false);
         Debug.Log("Target reached!");
     }
 
-    public void AttackEvent()
+    public void MeleeAttackEvent()
     {
         StartCoroutine(MeleeAttack());
+    }
+
+    public void RangedAttackEvent()
+    {
+        StartCoroutine(RangedAttack());
     }
 
     public void FindClosestMonster()

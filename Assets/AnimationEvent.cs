@@ -7,10 +7,15 @@ public class AnimationEvent : MonoBehaviour
     [SerializeField] PlayerControler playerControler;
     [SerializeField] Player player;
 
-    public void AttackEvent()
+    public void MeleeAttackEvent()
     {
         Debug.Log("한번 본다잉");
-        playerControler.AttackEvent();
+        playerControler.MeleeAttackEvent();
+    }
+
+    public void RangedAttackEvent()
+    {
+        playerControler.RangedAttackEvent();
     }
 
     public void StopMeleeAttackAnimationEvent()

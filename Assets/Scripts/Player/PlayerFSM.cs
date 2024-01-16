@@ -142,7 +142,6 @@ public class PlayerFSM : MonoBehaviour
         if (Time.time - lastAttackTime >= attackDelay) // 마지막 공격 시간으로부터 1초가 지났는지 확인
         {
             TryAttack();
-            StartCoroutine(playerControler.RangedAttack());
             lastAttackTime = Time.time; // 마지막 공격 시간 업데이트
         }
 
