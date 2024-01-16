@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MonsterControler : MonoBehaviour
 {
-    Transform closestMonsterTransform;
+    Transform closestPlayerTransform;
 
     [SerializeField] Rigidbody2D rb;
 
@@ -17,15 +17,20 @@ public class MonsterControler : MonoBehaviour
 
     private void Start()
     {
-        closestMonsterTransform = GameObject.FindWithTag("Player").transform;
+        closestPlayerTransform = GameObject.FindWithTag("Player").transform;
+    }
+
+    public void SetClosestPlayer(Transform transform)
+    {
+        closestPlayerTransform = transform;
     }
 
     public bool Move()
     {
-        if (closestMonsterTransform == null) return false;
+        if (closestPlayerTransform == null) return false;
 
         Vector3 position = rb.position;
-        var direction = (closestMonsterTransform.position - position).normalized;
+        var direction = (closestPlayerTransform.position - position).normalized;
 
         var newPosition = position + direction * (moveSpeed * Time.fixedDeltaTime);
         rb.MovePosition(newPosition);
@@ -35,10 +40,10 @@ public class MonsterControler : MonoBehaviour
         return true;
     }
 
-
+    
     private void FlipSprite(float directionX)
     {
-        if (closestMonsterTransform == null) return;
+        if (closestPlayerTransform == null) return;
 
         var transform = this.transform;
         var scale = transform.localScale;

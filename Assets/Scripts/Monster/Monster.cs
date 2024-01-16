@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Monster : Character
 {
-    [SerializeField] GameObject deathEffect;
     [SerializeField] GameObject hitEffect;
     [SerializeField] MonsterFSM FSM;
 
@@ -13,8 +12,6 @@ public class Monster : Character
         hitEffect.SetActive(true);
         if (CheckHealth())
         {
-            deathEffect.SetActive(true);
-            
         }
         return base.TakeDamage(value);
     }
