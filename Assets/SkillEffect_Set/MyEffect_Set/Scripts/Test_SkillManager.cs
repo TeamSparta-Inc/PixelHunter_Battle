@@ -14,13 +14,13 @@ public class Test_SkillManager : MonoBehaviour
 
     void Update()
     {
-        // 닌자근접 (기본, 궁극스킬)
+        // 도사근접 (기본, 궁극스킬)
         if (Input.GetKeyDown(KeyCode.Alpha1))
             Instantiate(prefabs[0], player.transform.position, prefabs[0].transform.rotation);
         if (Input.GetKeyDown(KeyCode.Alpha2))
             Instantiate(prefabs[1], bottom.transform.position, prefabs[1].transform.rotation);
 
-        // 도사근접 (기본, 궁극스킬)
+        // 닌자근접 (기본, 궁극스킬)
         if (Input.GetKeyDown(KeyCode.Alpha3))
             Instantiate(prefabs[2], player.transform.position, prefabs[2].transform.rotation);
         if (Input.GetKeyDown(KeyCode.Alpha4))

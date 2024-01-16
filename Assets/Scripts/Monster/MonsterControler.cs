@@ -61,4 +61,14 @@ public class MonsterControler : MonoBehaviour
                 break;
         }
     }
+
+
+    //public void Takeknockback()
+    //{
+    //    float knockbackForce = 100f;
+
+    //    Vector2 knockbackDirection = (rb.position - (Vector2)closestPlayerTransform.position).normalized;
+
+    //    rb.AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse);
+    //}
 }
