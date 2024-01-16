@@ -14,7 +14,7 @@ public class AttackCollider : MonoBehaviour
             PlayerControler.isKilled?.Invoke();
         }
 
-        gameObject.SetActive(false);
+        if (gameObject.tag == "RangedAttack") gameObject.SetActive(false);
     }
 
     //private void OnTriggerExit2D(Collider2D collision)

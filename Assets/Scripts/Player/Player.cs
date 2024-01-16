@@ -9,12 +9,15 @@ public class Player : Character
     [SerializeField] GameObject meleeAttackRange;
     [SerializeField] GameObject RangedAttackRange;
 
+    [SerializeField] GameObject meleeCollider;
 
     public void ChangeAttack()
     {
         isMeleeAttack = !isMeleeAttack;
 
         meleeAttackRange.SetActive(isMeleeAttack);
+        meleeCollider.SetActive(isMeleeAttack);
+
         RangedAttackRange.SetActive(!isMeleeAttack);
     }
 

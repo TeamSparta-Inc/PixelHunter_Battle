@@ -6,10 +6,15 @@ public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager instance;
 
+    [SerializeField] Player player;
+    [SerializeField] PlayerControler playerControler;
+
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private int poolSize = 10;
 
     private Queue<GameObject> projectilePool = new Queue<GameObject>();
+
+    
 
     private void Awake()
     {
