@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class AttackCollider : MonoBehaviour
 {
-    [SerializeField] PlayerControler playerControler;
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.CompareTag(Strings.TAG_MONSTER)) return;
@@ -13,8 +11,10 @@ public class AttackCollider : MonoBehaviour
         if (collision.GetComponent<Monster>().TakeDamage(10))
         {
             Debug.Log("ReSet!");
-            playerControler.ResetClosestMonster();
+            PlayerControler.isKilled?.Invoke();
         }
+
+        gameObject.SetActive(false);
     }
 
     //private void OnTriggerExit2D(Collider2D collision)

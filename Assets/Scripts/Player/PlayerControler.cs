@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,8 @@ using static UnityEngine.GraphicsBuffer;
 
 public class PlayerControler : MonoBehaviour
 {
+    public static Action isKilled;
+
     Player player;
 
     [SerializeField] Rigidbody2D rb;
@@ -27,6 +30,7 @@ public class PlayerControler : MonoBehaviour
     }
     private void Start()
     {
+        isKilled += ResetClosestMonster;
         centerPosition = transform.position;
         tempSpeed = player.GetAnimationLength(Strings.ANIMATION_MELEEATTACK);
     }
@@ -84,19 +88,33 @@ public class PlayerControler : MonoBehaviour
         projectile.transform.position = transform.position;
 
         projectile.gameObject.SetActive(true);
-        while (Vector3.Distance(projectile.position, closestMonsterTransform.position) > 0.1f)
+        bool hasReachedTarget = false;
+
+        while (!hasReachedTarget || (closestMonsterTransform != null && Vector3.Distance(projectile.position, closestMonsterTransform.position) <= 1.0f))
         {
+            if (closestMonsterTransform == null)
+            {
+                // 목표가 사라졌을 경우, 코루틴을 종료합니다.
+                break;
+            }
+
             Vector2 direction = (closestMonsterTransform.position - (Vector3)projectile.position).normalized;
             projectile.position += direction * 10 * Time.deltaTime;
 
-            yield return null; // 다음 프레임까지 기다립니다
+            if (!hasReachedTarget && Vector3.Distance(projectile.position, closestMonsterTransform.position) <= 0.1f)
+            {
+                hasReachedTarget = true;
+            }
+
+            yield return null;
         }
 
-        // 목표에 도달했을 때의 처리
+        // 목표에 도달한 후 추가 이동 완료
         PlayerManager.instance.ReturnProjectile(projectile.gameObject);
         projectile.gameObject.SetActive(false);
-        Debug.Log("Target reached!");
+        Debug.Log("Target reached and passed!");
     }
+
 
     public void MeleeAttackEvent()
     {
