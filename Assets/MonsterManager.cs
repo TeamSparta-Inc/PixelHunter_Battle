@@ -11,6 +11,7 @@ public class MonsterManager : MonoBehaviour
 
     [SerializeField] Transform target;
 
+    public List<GameObject> activeMonsters = new List<GameObject>();
 
     private void Awake()
     {
@@ -24,7 +25,7 @@ public class MonsterManager : MonoBehaviour
 
     void InitializeMonsterPool()
     {
-        for (int i=0; i< poolSize; i++)
+        for (int i = 0; i < poolSize; i++)
         {
             GameObject monster = Instantiate(monsterPrefab.gameObject);
 
@@ -41,11 +42,13 @@ public class MonsterManager : MonoBehaviour
         {
             GameObject monster = monsterPool.Dequeue();
             monster.SetActive(true);
+            activeMonsters.Add(monster);
             return monster;
         }
         else
         {
             GameObject newMonster = Instantiate(monsterPrefab.gameObject);
+            activeMonsters.Add(newMonster);
             return newMonster;
         }
     }
@@ -53,12 +56,13 @@ public class MonsterManager : MonoBehaviour
     public void ReturnMonster(GameObject monster)
     {
         monster.SetActive(false);
+        activeMonsters.Remove(monster);
         monsterPool.Enqueue(monster);
     }
 
     public void SpawnMonster()
     {
-        GetMonster().transform.position = new Vector2(2,4);
+        GetMonster().transform.position = new Vector2(2, 4);
         GetMonster().transform.position = new Vector2(-2, 4);
         GetMonster().transform.position = new Vector2(2, -4);
         GetMonster().transform.position = new Vector2(-2, -4);
