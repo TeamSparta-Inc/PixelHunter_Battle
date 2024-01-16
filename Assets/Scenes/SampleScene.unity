@@ -569,7 +569,7 @@ MonoBehaviour:
   closestMonsterTransform: {fileID: 0}
   angle: 0
   attackCol: {fileID: 1688117546}
-  totalTime: 2
+  totalTime: 0.001
 --- !u!58 &1070499273
 CircleCollider2D:
   m_ObjectHideFlags: 0

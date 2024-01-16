@@ -21,7 +21,7 @@ public class PlayerControler : MonoBehaviour
     Vector3 centerPosition;
 
     [SerializeField] GameObject attackCol;
-    float tempSpeed;
+    float tempSpeed = 1;
 
     private void Awake()
     {
@@ -32,7 +32,7 @@ public class PlayerControler : MonoBehaviour
     {
         isKilled += ResetClosestMonster;
         centerPosition = transform.position;
-        tempSpeed = player.GetAnimationLength(Strings.ANIMATION_MELEEATTACK);
+        tempSpeed = player.GetAnimationLength(Strings.ANIMATION_MELEEATTACK) /2;
     }
 
     public bool Move()
@@ -63,7 +63,7 @@ public class PlayerControler : MonoBehaviour
 
             if (elapsedTime < totalTime)
             {
-                float angle = (elapsedTime / totalTime) * 150f;
+                float angle = (elapsedTime / totalTime) * 120f;
                 float radian = angle * Mathf.Deg2Rad;
 
                 // 새 위치 계산 (x축과 y축을 사용)
@@ -74,7 +74,7 @@ public class PlayerControler : MonoBehaviour
             {
                 Debug.Log("도착!");
                 // 이동 완료 후 초기 위치로 설정
-                attackCol.transform.localPosition = centerPosition - new Vector3(0, radius, 0);
+                //attackCol.transform.localPosition = centerPosition - new Vector3(0, radius, 0);
                 elapsedTime = 0; // 경과 시간 초기화
                 yield break;
             }
