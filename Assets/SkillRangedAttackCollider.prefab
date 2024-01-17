@@ -31,7 +31,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1213529451062198}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 2.601, y: 2.058, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -4205,16 +4205,16 @@ ParticleSystem:
       maxGradient:
         serializedVersion: 2
         key0: {r: 0.7122642, g: 0.8237618, b: 1, a: 1}
-        key1: {r: 1, g: 0.37254906, b: 0.99594027, a: 1}
-        key2: {r: 0.49654344, g: 0.13594696, b: 0.6132076, a: 0}
-        key3: {r: 0.18662772, g: 0, b: 0.40392157, a: 0}
+        key1: {r: 0.37254906, g: 0.47359574, b: 1, a: 1}
+        key2: {r: 0.13725491, g: 0.18609872, b: 0.6117647, a: 0}
+        key3: {r: 0, g: 0.054914713, b: 0.40392157, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
         key5: {r: 0, g: 0, b: 0, a: 0}
         key6: {r: 0, g: 0, b: 0, a: 0}
         key7: {r: 0, g: 0, b: 0, a: 0}
         ctime0: 0
         ctime1: 4893
-        ctime2: 11359
+        ctime2: 10987
         ctime3: 16384
         ctime4: 0
         ctime5: 0
@@ -4229,7 +4229,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
-        m_ColorSpace: -1
+        m_ColorSpace: 0
         m_NumColorKeys: 4
         m_NumAlphaKeys: 2
       minGradient:
@@ -4936,7 +4936,7 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 0.6542239, g: 0, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.07791233, b: 1, a: 1}
   m_Intensity: 1
   m_Range: 4
   m_SpotAngle: 30
@@ -5284,7 +5284,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 0.62738705, g: 0.09019607, b: 1, a: 1}
-      maxColor: {r: 0.8682076, g: 0.39215684, b: 1, a: 0.56078434}
+      maxColor: {r: 0.39215684, g: 0.52623814, b: 1, a: 0.56078434}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -10133,8 +10133,8 @@ ParticleSystem:
     startColor:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 0.62738705, g: 0.09019607, b: 1, a: 1}
-      maxColor: {r: 1, g: 0.6556604, b: 0.9652768, a: 1}
+      minColor: {r: 0.09019607, g: 0.17271413, b: 1, a: 1}
+      maxColor: {r: 0.654902, g: 0.68545026, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
