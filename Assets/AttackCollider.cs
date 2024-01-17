@@ -8,9 +8,8 @@ public class AttackCollider : MonoBehaviour
     {
         if (!collision.CompareTag(Strings.TAG_MONSTER)) return;
 
-        if (collision.GetComponent<Monster>().TakeDamage(10))
+        if (collision.GetComponent<Monster>().TakeDamage(100))
         {
-            Debug.Log("플레이 근접 스킬");
             Debug.Log("ReSet!");
             PlayerControler.isKilled?.Invoke();
         }
