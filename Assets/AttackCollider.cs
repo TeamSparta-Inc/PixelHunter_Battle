@@ -16,28 +16,49 @@ public class AttackCollider : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.CompareTag(Strings.TAG_MONSTER))
+        if (collision.gameObject.CompareTag(Strings.TAG_MONSTER))
         {
-            if (collision.GetComponent<Monster>().TakeDamage(10))
+            if (collision.gameObject.GetComponent<Monster>().TakeDamage(10))
             {
                 Debug.Log("ReSet!");
                 PlayerControler.isKilled?.Invoke();
             }
-
-            if (gameObject.tag == "RangedAttack")
-            {
-                gameObject.SetActive(false);
-            }
         }
-
-        if (collision.CompareTag("WallX") || collision.CompareTag("WallY"))
+        else if (collision.gameObject.CompareTag("Wall"))
         {
-            Debug.Log("나 벽에 맞았다");
-            BounceOffWall(collision.CompareTag("WallX"));
+            Debug.Log("벽에 부딫혔다!");
+            ContactPoint2D contact = collision.GetContact(0);
+            BounceOffWall(contact.normal);
         }
+
+        if (gameObject.tag == "RangedAttack" && !collision.gameObject.CompareTag("Wall"))
+            gameObject.SetActive(false);
     }
+
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if (collision.CompareTag(Strings.TAG_MONSTER))
+    //    {
+    //        if (collision.GetComponent<Monster>().TakeDamage(10))
+    //        {
+    //            Debug.Log("ReSet!");
+    //            PlayerControler.isKilled?.Invoke();
+    //        }
+    //    }
+    //    else if (collision.CompareTag("Wall"))
+    //    {
+    //        ContactPoint2D contact = collision.GetContact(0);
+    //        BounceOffWall(contact.normal);
+    //    }
+
+    //    if (gameObject.tag == "RangedAttack" && !collision.CompareTag("Wall"))
+    //        gameObject.SetActive(false);
+    //}
+
+
+
 
     public void SkillRangedAttackEvent(Transform target)
     {
@@ -64,9 +85,17 @@ public class AttackCollider : MonoBehaviour
         PlayerManager.instance.ReturnSkillProjectile(gameObject);
     }
 
-    void BounceOffWall(bool isWallX)
+    void BounceOffWall(Vector2 normal)
     {
-        direction.x *= isWallX ? -1 : 1;
-        direction.y *= isWallX ? 1 : -1;
+        if (Mathf.Abs(normal.x) > Mathf.Abs(normal.y))
+        {
+            // X축에 더 큰 충격이 있었음, Y축 방향 유지
+            direction = new Vector2(-direction.x, direction.y);
+        }
+        else
+        {
+            // Y축에 더 큰 충격이 있었음, X축 방향 유지
+            direction = new Vector2(direction.x, -direction.y);
+        }
     }
 }

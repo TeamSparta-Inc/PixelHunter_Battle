@@ -9,6 +9,7 @@ TagManager:
   - RangedAttack
   - WallX
   - WallY
+  - Wall
   layers:
   - Default
   - TransparentFX
