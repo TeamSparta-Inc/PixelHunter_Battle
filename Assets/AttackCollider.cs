@@ -18,15 +18,7 @@ public class AttackCollider : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag(Strings.TAG_MONSTER))
-        {
-            if (collision.gameObject.GetComponent<Monster>().TakeDamage(10))
-            {
-                Debug.Log("ReSet!");
-                PlayerControler.isKilled?.Invoke();
-            }
-        }
-        else if (collision.gameObject.CompareTag("Wall"))
+        if (collision.gameObject.CompareTag("Wall"))
         {
             Debug.Log("벽에 부딫혔다!");
             ContactPoint2D contact = collision.GetContact(0);
@@ -37,6 +29,22 @@ public class AttackCollider : MonoBehaviour
             gameObject.SetActive(false);
     }
 
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag(Strings.TAG_MONSTER))
+        {
+            if (collision.gameObject.GetComponent<Monster>().TakeDamage(10))
+            {
+                Debug.Log("ReSet!");
+                PlayerControler.isKilled?.Invoke();
+            }
+        }
+
+        if (gameObject.tag == "RangedAttack" && !collision.gameObject.CompareTag("Wall"))
+            gameObject.SetActive(false);
+
+    }
     //private void OnTriggerEnter2D(Collider2D collision)
     //{
     //    if (collision.CompareTag(Strings.TAG_MONSTER))
@@ -98,4 +106,4 @@ public class AttackCollider : MonoBehaviour
             direction = new Vector2(direction.x, -direction.y);
         }
     }
-}
+} 
