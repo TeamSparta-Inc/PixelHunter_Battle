@@ -34,7 +34,7 @@ public class AttackCollider : MonoBehaviour
     {
         if (collision.gameObject.CompareTag(Strings.TAG_MONSTER))
         {
-            if (collision.gameObject.GetComponent<Monster>().TakeDamage(10))
+            if (collision.gameObject.GetComponent<Monster>().TakeDamage(10))    
             {
                 Debug.Log("ReSet!");
                 PlayerControler.isKilled?.Invoke();
