@@ -37,7 +37,7 @@ Transform:
   m_Children:
   - {fileID: 4549684551196332}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!198 &198277538348117068
 ParticleSystem:
@@ -5021,7 +5021,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.2
+  m_Radius: 0.1
 --- !u!50 &5018338723079561682
 Rigidbody2D:
   serializedVersion: 4

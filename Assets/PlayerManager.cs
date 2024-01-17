@@ -41,6 +41,7 @@ public class PlayerManager : MonoBehaviour
     {
         if (projectilePool.Count > 0)
         {
+            Debug.Log("가져온다");
             GameObject projectile = projectilePool.Dequeue();
             projectile.SetActive(true);
             return projectile;
@@ -54,6 +55,7 @@ public class PlayerManager : MonoBehaviour
 
     public void ReturnProjectile(GameObject projectile)
     {
+        Debug.Log("리턴한다");
         projectile.SetActive(false);
         projectilePool.Enqueue(projectile);
     }
@@ -74,7 +76,6 @@ public class PlayerManager : MonoBehaviour
         if (skillProjectilePool.Count > 0)
         {
             GameObject SkillProjectile = skillProjectilePool.Dequeue();
-            Debug.Log("가져온다");
             SkillProjectile.SetActive(true);
             return SkillProjectile;
         }
@@ -87,7 +88,6 @@ public class PlayerManager : MonoBehaviour
 
     public void ReturnSkillProjectile(GameObject skillProjectile)
     {
-        Debug.Log("리턴한다");
         skillProjectile.SetActive(false);
         skillProjectilePool.Enqueue(skillProjectile);
     }

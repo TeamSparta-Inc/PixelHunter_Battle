@@ -200,7 +200,7 @@ public class PlayerControler : MonoBehaviour
         }
     }
 
-    private void FlipSprite()
+    public void FlipSprite()
     {
         if (closestMonsterTransform == null) return;
 

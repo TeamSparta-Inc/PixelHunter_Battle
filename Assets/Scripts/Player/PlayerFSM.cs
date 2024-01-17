@@ -24,7 +24,6 @@ public class PlayerFSM : MonoBehaviour
         FSM.ChangeState(Enums.StateEnum.Spawn);
     }
 
-
     private void Update()
     {
         FSM.Driver.Update?.Invoke();
@@ -97,7 +96,7 @@ public class PlayerFSM : MonoBehaviour
 
     void Run_Exit()
     {
-        playerControler.Move();
+        playerControler.FlipSprite();
         player.StopAnimation(Strings.ANIMATION_RUN);
     }
 
@@ -146,6 +145,11 @@ public class PlayerFSM : MonoBehaviour
         }
 
         CheckStateTransition();
+
+        if (player.GetAttack())
+        {
+            FSM.ChangeState(Enums.StateEnum.MeleeAttack);
+        }
     }
 
     void RangedAttack_Exit()

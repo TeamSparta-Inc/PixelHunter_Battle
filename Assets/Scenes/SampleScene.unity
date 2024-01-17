@@ -447,7 +447,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   playerControler: {fileID: 0}
-  projectilePrefab: {fileID: 7797081895325367890, guid: 23b11350c6543419f83ca9696b0b33a4, type: 3}
+  projectilePrefab: {fileID: 1213529451062198, guid: 07172901226694462929445a9b34411b, type: 3}
   skillProjectilePrefab: {fileID: 1213529451062198, guid: 1405f7a46ad73504d8cbe4b7ddd1d552, type: 3}
   poolSize: 10
 --- !u!4 &516886005
