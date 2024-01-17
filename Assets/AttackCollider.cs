@@ -39,10 +39,10 @@ public class AttackCollider : MonoBehaviour
                 Debug.Log("ReSet!");
                 PlayerControler.isKilled?.Invoke();
             }
+            if (gameObject.tag == "RangedAttack")
+                gameObject.SetActive(false);
         }
 
-        if (gameObject.tag == "RangedAttack" && !collision.gameObject.CompareTag("Wall"))
-            gameObject.SetActive(false);
 
     }
     //private void OnTriggerEnter2D(Collider2D collision)
