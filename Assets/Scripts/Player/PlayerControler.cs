@@ -35,6 +35,16 @@ public class PlayerControler : MonoBehaviour
         tempSpeed = player.GetAnimationLength(Strings.ANIMATION_MELEEATTACK) /2;
     }
 
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            Debug.Log("나 눌림 !");
+            SkillRangedAttack();
+        }
+    }
+
     public bool Move()
     {
         if (closestMonsterTransform == null) return false;
@@ -111,8 +121,17 @@ public class PlayerControler : MonoBehaviour
 
         // 목표에 도달한 후 추가 이동 완료
         PlayerManager.instance.ReturnProjectile(projectile.gameObject);
-        projectile.gameObject.SetActive(false);
-        Debug.Log("Target reached and passed!");
+    }
+
+    public void SkillRangedAttack()
+    {
+
+
+        Rigidbody2D skillProjectile = PlayerManager.instance.GetSkillProjectile().GetComponent<Rigidbody2D>();
+
+        skillProjectile.transform.position = transform.position;
+
+        skillProjectile.GetComponent<AttackCollider>().SkillRangedAttackEvent(closestMonsterTransform);
     }
 
 

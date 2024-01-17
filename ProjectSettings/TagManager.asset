@@ -7,6 +7,8 @@ TagManager:
   - Monster
   - AttackedPosition
   - RangedAttack
+  - WallX
+  - WallY
   layers:
   - Default
   - TransparentFX

@@ -10,9 +10,12 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] PlayerControler playerControler;
 
     [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private GameObject skillProjectilePrefab;
+
     [SerializeField] private int poolSize = 10;
 
     private Queue<GameObject> projectilePool = new Queue<GameObject>();
+    private Queue<GameObject> skillProjectilePool = new Queue<GameObject>();
 
     
 
@@ -21,6 +24,7 @@ public class PlayerManager : MonoBehaviour
         instance = this;
 
         InitializeProjectilePool();
+        InitializeSkillProjectilePool();
     }
 
     void InitializeProjectilePool()
@@ -52,5 +56,39 @@ public class PlayerManager : MonoBehaviour
     {
         projectile.SetActive(false);
         projectilePool.Enqueue(projectile);
+    }
+
+
+    void InitializeSkillProjectilePool()
+    {
+        for (int i = 0; i < poolSize; i++)
+        {
+            GameObject skillProjectile = Instantiate(skillProjectilePrefab);
+            skillProjectile.SetActive(false);
+            skillProjectilePool.Enqueue(skillProjectile);
+        }
+    }
+
+    public GameObject GetSkillProjectile()
+    {
+        if (skillProjectilePool.Count > 0)
+        {
+            GameObject SkillProjectile = skillProjectilePool.Dequeue();
+            Debug.Log("가져온다");
+            SkillProjectile.SetActive(true);
+            return SkillProjectile;
+        }
+        else
+        {
+            GameObject newSkillProjectile = Instantiate(skillProjectilePrefab);
+            return newSkillProjectile;
+        }
+    }
+
+    public void ReturnSkillProjectile(GameObject skillProjectile)
+    {
+        Debug.Log("리턴한다");
+        skillProjectile.SetActive(false);
+        skillProjectilePool.Enqueue(skillProjectile);
     }
 }

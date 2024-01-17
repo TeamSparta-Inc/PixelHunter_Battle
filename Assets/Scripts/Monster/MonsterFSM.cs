@@ -109,7 +109,6 @@ public class MonsterFSM : MonoBehaviour
 
     IEnumerator Death()
     {
-        Debug.Log("불리고 있나니? ");
         monster.StartAnimation(Strings.ANIMATION_DEATH);
 
         yield return deathDelay;

@@ -10,12 +10,12 @@ public class HS_ProjectileMover : MonoBehaviour
     public Vector3 rotationOffset = new Vector3(0, 0, 0);
     public GameObject hit;
     public GameObject flash;
-    private Rigidbody rb;
+    private Rigidbody2D rb;
     public GameObject[] Detached;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody2D>();
         if (flash != null)
         {
             //Instantiate flash effect on projectile position
@@ -34,7 +34,7 @@ public class HS_ProjectileMover : MonoBehaviour
                 Destroy(flashInstance, flashPsParts.main.duration);
             }
         }
-        Destroy(gameObject,5);
+        //Destroy(gameObject,5);
 	}
 
     void FixedUpdate ()
@@ -50,7 +50,7 @@ public class HS_ProjectileMover : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         //Lock all axes movement and rotation
-        rb.constraints = RigidbodyConstraints.FreezeAll;
+        //rb.constraints = RigidbodyConstraints.FreezeAll;
         speed = 0;
 
         ContactPoint contact = collision.contacts[0];
@@ -88,6 +88,6 @@ public class HS_ProjectileMover : MonoBehaviour
             }
         }
         //Destroy projectile on collision
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
 }
