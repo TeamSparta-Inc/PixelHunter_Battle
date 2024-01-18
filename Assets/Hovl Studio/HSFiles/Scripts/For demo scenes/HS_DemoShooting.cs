@@ -46,7 +46,7 @@ public class HS_DemoShooting : MonoBehaviour
         }
 
         //Fast shooting
-        if (Input.GetMouseButton(1) && fireCountdown <= 0f)
+        if (Input.GetMouseButton(1) && fireCountdown <= 0f || Input.GetKey(KeyCode.Space))
         {
             Instantiate(Prefabs[Prefab], FirePoint.transform.position, FirePoint.transform.rotation);
             fireCountdown = 0;

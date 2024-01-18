@@ -11,6 +11,7 @@ public class Player : Character
 
     [SerializeField] GameObject meleeCollider;
 
+
     public void ChangeAttack()
     {
         isMeleeAttack = !isMeleeAttack;
@@ -20,7 +21,7 @@ public class Player : Character
 
         RangedAttackRange.SetActive(!isMeleeAttack);
     }
-
+     
     public bool GetAttack()
     {
         return isMeleeAttack;

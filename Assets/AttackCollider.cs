@@ -11,6 +11,8 @@ public class AttackCollider : MonoBehaviour
     const float maxDuration = 2f; // 상수로 선언
     const float speed = 10f; // 상수로 선언
 
+    int damage;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -45,27 +47,6 @@ public class AttackCollider : MonoBehaviour
             gameObject.SetActive(false);
 
     }
-    //private void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    if (collision.CompareTag(Strings.TAG_MONSTER))
-    //    {
-    //        if (collision.GetComponent<Monster>().TakeDamage(10))
-    //        {
-    //            Debug.Log("ReSet!");
-    //            PlayerControler.isKilled?.Invoke();
-    //        }
-    //    }
-    //    else if (collision.CompareTag("Wall"))
-    //    {
-    //        ContactPoint2D contact = collision.GetContact(0);
-    //        BounceOffWall(contact.normal);
-    //    }
-
-    //    if (gameObject.tag == "RangedAttack" && !collision.CompareTag("Wall"))
-    //        gameObject.SetActive(false);
-    //}
-
-
 
 
     public void SkillRangedAttackEvent(Transform target)

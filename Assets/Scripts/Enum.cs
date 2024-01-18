@@ -9,4 +9,9 @@ public class Enums
         RangedAttack,
         Death,
     }
+
+    public enum SkillType
+    {
+
+    }
 }

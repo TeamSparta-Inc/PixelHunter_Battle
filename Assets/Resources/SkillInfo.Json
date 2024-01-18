@@ -1,0 +1,12 @@
+﻿{
+    "skills": [
+        {
+            "index": 0,
+            "name": "Slash",
+            "coolTime": 2.0,
+            "skillType": "Melee",
+            "damage": 30,
+            "description": "A quick melee attack that deals significant damage to a single target."
+        }
+    ]
+}
