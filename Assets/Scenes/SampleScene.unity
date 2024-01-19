@@ -292,7 +292,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 715053772552598124, guid: 5e0fe06260642473486641d93094796d, type: 3}
       propertyPath: lengthInSec
-      value: 0.8
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 1422954462615487754, guid: 5e0fe06260642473486641d93094796d, type: 3}
       propertyPath: stopAction
@@ -300,11 +300,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1422954462615487754, guid: 5e0fe06260642473486641d93094796d, type: 3}
       propertyPath: lengthInSec
-      value: 0.8
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 2820885930566111935, guid: 5e0fe06260642473486641d93094796d, type: 3}
       propertyPath: lengthInSec
-      value: 0.8
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 2820885930566111935, guid: 5e0fe06260642473486641d93094796d, type: 3}
       propertyPath: EmissionModule.m_Bursts.Array.data[0].time
@@ -1198,6 +1198,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d5ce4c3ee49d4905ac90b575cdbe7a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 0
 --- !u!1 &1746161999
 GameObject:
   m_ObjectHideFlags: 0

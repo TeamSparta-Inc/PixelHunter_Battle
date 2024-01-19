@@ -25,6 +25,6 @@ public class AnimationEvent : MonoBehaviour
 
     public void StopRangedAttackAnimationEvent()
     {
-        player.StopAnimation(Strings.ANIMATION_RANGEDATTACK);
+        player.StopAnimation(Strings.ANIMATION_RANGEDATTACK);x
     }
 }

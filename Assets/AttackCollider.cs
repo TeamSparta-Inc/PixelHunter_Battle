@@ -11,7 +11,7 @@ public class AttackCollider : MonoBehaviour
     const float maxDuration = 2f; // 상수로 선언
     const float speed = 10f; // 상수로 선언
 
-    int damage;
+    [SerializeField] int damage = 10;
 
     private void Awake()
     {
@@ -36,7 +36,7 @@ public class AttackCollider : MonoBehaviour
     {
         if (collision.gameObject.CompareTag(Strings.TAG_MONSTER))
         {
-            if (collision.gameObject.GetComponent<Monster>().TakeDamage(10))    
+            if (collision.gameObject.GetComponent<Monster>().TakeDamage(damage))    
             {
                 Debug.Log("ReSet!");
                 PlayerControler.isKilled?.Invoke();
@@ -86,5 +86,11 @@ public class AttackCollider : MonoBehaviour
             // Y축에 더 큰 충격이 있었음, X축 방향 유지
             direction = new Vector2(direction.x, -direction.y);
         }
+    }
+
+
+    public void SetDamage(int damage)
+    {
+        this.damage = damage;
     }
 } 

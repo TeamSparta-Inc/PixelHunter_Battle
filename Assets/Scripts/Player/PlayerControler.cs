@@ -31,7 +31,7 @@ public class PlayerControler : MonoBehaviour
     private void Start()
     {
         isKilled += ResetClosestMonster;
-        centerPosition = transform.localPosition;
+        centerPosition = transform.position;
         tempSpeed = player.GetAnimationLength(Strings.ANIMATION_MELEEATTACK) /2;
     }
 

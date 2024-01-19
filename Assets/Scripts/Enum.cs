@@ -12,6 +12,6 @@ public class Enums
 
     public enum SkillType
     {
-
+        
     }
 }

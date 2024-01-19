@@ -21,11 +21,11 @@ public class SlashSkill : ISkill
     {
         // 스킬 로직 실행
         skillObject.transform.position = player.position;
-
+        skillObject.GetComponent<AttackCollider>().SetDamage(skillData.damage);
         skillObject.SetActive(true);
     }
 
-    public void LoadData(int index)
+    public void LoadData(int index) // CSV -> JOSN
     {
         TextAsset jsonData = Resources.Load<TextAsset>("SkillInfo");
         string jsonString = jsonData.text;
